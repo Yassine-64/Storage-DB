@@ -1,0 +1,31 @@
+CREATE table client (
+    client_id int  AUTO_INCREMENT,
+    nom varchar(10),
+    prenmom varchar(10),
+    email varchar(45),
+    adresse varchar(45),
+    telephone varchar(45),
+     PRIMARY KEY (client_id)
+);
+
+CREATE TABLE produits(
+    id_produit INT AUTO_INCREMENT,
+    nom VARCHAR(10),
+    description VARCHAR(255),
+    prix DECIMAL(10, 2), 
+    stock INT,
+    PRIMARY KEY (id_produit)
+);
+
+CREATE TABLE commandes (
+    id_commande INT,
+    id_client INT,
+    date_commande DATE,
+    statue VARCHAR(25),
+    total DECIMAL(10,2),
+    PRIMARY KEY (id_commande),
+    FOREIGN KEY (id_client) REFERENCES client (client_id)
+);
+
+alter table commandes
+ADD CONSTRAINT check_statut CHECK (statue IN ('en cours','livrée','annulée'));
